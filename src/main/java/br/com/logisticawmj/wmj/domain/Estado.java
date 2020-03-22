@@ -5,7 +5,6 @@
  */
 package br.com.logisticawmj.wmj.domain;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,63 +14,63 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 /**
  *
  * @author wellington
  */
 @Entity
-public class Categoria implements Serializable {
+public class Estado implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer Id;
-
-    private String name;
+    private Integer id;
+    private String nome;
     
-    @JsonManagedReference
-    @ManyToMany(mappedBy = "listCategorias")
-
-    private List<Produto> listProdutos = new ArrayList<>();
-
-    public Categoria() {
-
+    @OneToMany(mappedBy = "estado")    
+    private List<Cidade> cidades = new ArrayList<>();  
+    
+    public Estado(){
+        
     }
 
-    public Categoria(Integer Id, String name) {
-        this.Id = Id;
-        this.name = name;
+    public Estado(Integer id, String nome) {
+        super();
+        this.id = id;
+        this.nome = nome;
     }
 
     public Integer getId() {
-        return Id;
+        return id;
     }
 
-    public void setId(Integer Id) {
-        this.Id = Id;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getNome() {
+        return nome;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-     public List<Produto> getListProdutos() {
-        return listProdutos;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
-    public void setListProdutos(List<Produto> listProdutos) {
-        this.listProdutos = listProdutos;
+    public List<Cidade> getCidades() {
+        return cidades;
+    }
+
+    public void setCidades(List<Cidade> cidades) {
+        this.cidades = cidades;
     }
 
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 17 * hash + Objects.hashCode(this.Id);
+        hash = 89 * hash + Objects.hashCode(this.id);
         return hash;
     }
 
@@ -86,13 +85,13 @@ public class Categoria implements Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Categoria other = (Categoria) obj;
-        if (!Objects.equals(this.Id, other.Id)) {
+        final Estado other = (Estado) obj;
+        if (!Objects.equals(this.id, other.id)) {
             return false;
         }
         return true;
     }
-
-   
-
+    
+    
+    
 }

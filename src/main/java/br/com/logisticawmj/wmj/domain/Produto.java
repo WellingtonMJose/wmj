@@ -5,6 +5,7 @@
  */
 package br.com.logisticawmj.wmj.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +33,7 @@ public class Produto implements Serializable {
     private String nome;
     private Double preco;
     
+    @JsonBackReference
     @ManyToMany
     @JoinTable(name = "Produto_Categoria",
             joinColumns = @JoinColumn(name = "produto_Id"),
